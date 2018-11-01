@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # Provides matrices to stitch two quadrilaterals together
 
 include("chebpts.jl")

@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # All sorts of fun and exciting mesh processing methods
 
 # Contains everything you need to know about a quadrilateral mesh
@@ -432,8 +437,8 @@ if Pkg.installed("PyPlot") != nothing
         plt[:ioff]()
     end
 
-#     for i = 1:size(m.t, 1)
-#       plot([mean(m.p[m.t[i, 1:2], 1]), mean(m.p[m.t[i, 1:4], 1])], [mean(m.p[m.t[i, 1:2], 2]), mean(m.p[m.t[i, 1:4], 2])], color = "r", linewidth = 2, zorder = 11);
-#     end
+    for i = 1:size(m.t, 1)
+      plot([mean(m.p[m.t[i, 1:2], 1]), mean(m.p[m.t[i, 1:4], 1])], [mean(m.p[m.t[i, 1:2], 2]), mean(m.p[m.t[i, 1:4], 2])], color = "r", linewidth = 2, zorder = 11);
     end
+   end
 end

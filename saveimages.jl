@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # Saves hi-res images of Navier-Stokes solutions
 using Images
 using Colors

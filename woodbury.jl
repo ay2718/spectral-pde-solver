@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # We use the Woodbury Matrix Equation to use banded matrices (our matrices are almost banded with boundary condition rows)
 
 import Base.\

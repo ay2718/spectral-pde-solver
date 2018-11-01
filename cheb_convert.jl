@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # Conversion functions between chebyshev polynomial space and value space at chebyshev points
 
 # Planned 2D Chebyshev conversion (similar to planned 2D DCT-1)

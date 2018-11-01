@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # Basic conversion matrices for ultraspherical and Chebyshev coefficients
 
 # S0, converts a vector of Chebyshev coefficients to ultraspherical coefficients of parameter 1

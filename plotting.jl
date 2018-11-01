@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # Plots using PyPlot
 
 if !isdefined(:PyPlot)
@@ -74,36 +79,36 @@ function pcolor_coeffs( x, y, u, lim = 0, ax = 0, Cmap = "jet" )
 end
 
 function surf_coeffs( x, y, u, lim, Cmap = "jet" )
+    fig = figure()
+    ax = fig[:add_subplot](111, projection="3d")
     if (typeof(u) == Vector{Array{Float64}})||(typeof(u) == Vector{Array{Float64, 2}})
         sz = size(u, 1);
         pl = cheb_plan(size(u[1], 1));
         uu = Vector{Array{Float64, 2}}(sz);
-        plt[:ion]()
         for i = 1:sz
             uu[i] = coeffs2vals(u[i], pl);
-            plot_surface(x[i], y[i], uu[i], vmin = -lim, vmax = lim, cmap = ColorMap(Cmap), cstride = 1, rstride = 1);
+            ax[:plot_surface](x[i], y[i], uu[i], vmin = -lim, vmax = lim, cmap = ColorMap(Cmap), cstride = 1, rstride = 1);
         end
-        plt[:ioff]()
     elseif (typeof(u) == Array{Array{Float64}, 2})||(typeof(u) == Array{Array{Float64, 2}, 2})
         sz = size(u);
         pl = cheb_plan(size(u[1]));
         uu = Array{Array{Float64, 2}, 2}(sz);
-        plt[:ion]()
         for i = 1:sz[1]
             for j = 1:sz[2]
                 uu[i, j] = coeffs2vals(u[i, j], pl);
-                plot_surface(x[i, j], y[i, j], uu[i, j], vmin = -lim, vmax = lim, cmap = ColorMap(Cmap), cstride = 1, rstride = 1);
+                ax[:plot_surface](x[i, j], y[i, j], uu[i, j], vmin = -lim, vmax = lim, cmap = ColorMap(Cmap), cstride = 1, rstride = 1);
             end
         end
-        plt[:ioff]()
     else
         pl = cheb_plan(size(u));
         uu = coeffs2vals(u, pl);
-        plt[:ion]()
-        plot_surface(x, y, uu, vmin = -lim, vmax = lim, cmap = ColorMap(Cmap), cstride = 1, rstride = 1);
-        plt[:ioff]()
+        ax[:plot_surface](x, y, uu, vmin = -lim, vmax = lim, cmap = ColorMap(Cmap), cstride = 1, rstride = 1);
         
     end
+    tick_params(labelsize=18)
+    t = ax[:zaxis][:get_offset_text]()
+    t[:set_size](16)
+    ax[:view_init](45, -120)
     uu
 end
 

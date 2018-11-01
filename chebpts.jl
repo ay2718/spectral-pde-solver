@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # Handles Chebyshev points as well as the square to quadrilateral transformation
 
 include("quadmesh.jl")

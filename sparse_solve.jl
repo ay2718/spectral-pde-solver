@@ -1,3 +1,8 @@
+VER = v"0.7.0"
+if VERSION >= VER
+    error("Julia version < "*string(VER)*" required!")
+end
+
 # A \ B, where A is a sparse matrix UMFPACKLU object and B is a sparse matrix (this is useful if B has many zero columns)
 
 import Base.\;
